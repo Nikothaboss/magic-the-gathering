@@ -1,0 +1,22 @@
+img {
+  width: 100%;
+}
+
+.card {
+  width: 300px;
+  border: 1px solid black;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+button {
+  width: 100%;
+  padding: 5px;
+}
+
+.content {
+  padding: 10px;
+}

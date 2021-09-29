@@ -1,48 +1,22 @@
+import { items, collection } from "./data.js";
 const container = document.querySelector(".container");
 const collCon = document.querySelector(".collection-container")
 
-// ! Arrays
 
-const items = [
-    {
-        id: 0,
-        name: "Whatever",
-        race: "Dude i dont know",
-        img: "https://images.unsplash.com/photo-1456926631375-92c8ce872def?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2070&q=80",
-        type: "tiger"
-    },
-    {
-        id: 1,
-        name: "Whatever man",
-        race: "Dude",
-        img: "https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1172&q=80",
-        type: "dog"
-    }
-]
+const setDeleteEvent = () =>{
+    const delBtns = document.querySelectorAll(".delBtn");
 
-const displayCards = (array) =>{
-    container.innerHTML = ""
-    let neweDiv = ``
-    for(const item of array){
-        neweDiv += `
-            <div class="card">
-                <img src="${item.img}" alt="something" />
-                <div class="content">
-                    <h2>${item.name}</h2>
-                    <p>Race: ${item.race}</p>
-                    <p>Type: ${item.type}</p>
-                    <button class="delBtn" id=${item.id}>Delete</button>
-                    <button type="button" id="${item.name}" class="cardBtn">Add me</button>
-                </div>
-            </div>
-        `
+    for(const btn of delBtns){
+        btn.addEventListener("click", (e)=>{
+            const btnID = e.target.id
+            const index  = items.findIndex(item => item.name === btnID)
+            items.splice(index, 1)  
+            displayCards(items)
+        })
     }
-    container.innerHTML = neweDiv
 }
 
-displayCards(items)
 
-const collection = [];
 
 const appendListeners = () =>{
     const buttons = document.querySelectorAll(".cardBtn")
@@ -58,8 +32,6 @@ const appendListeners = () =>{
 
 }
 
-appendListeners()
-
 const renderCollection = () =>{
     collCon.innerHTML = "";
     
@@ -67,33 +39,59 @@ const renderCollection = () =>{
         console.log(coll)
         collCon.innerHTML += `<p>${coll}</p>`
     }
-}
-
-const deleteItems = () =>{
-    const delBtns = document.querySelectorAll(".delBtn");
-
-    for(const btn of delBtns){
-        btn.addEventListener("click", (e)=>{
-            // btnID = e.target.id
-            console.log(e.target.id)
-            const filtered = arrayRemove(items, items[e.target.id])
-            displayCards(filtered)
-
-        })
-    }
-}
-
-deleteItems()
-
-
-const arrayRemove =(arr, value)=> { 
     
-    return arr.filter(function(ele){ 
-        return ele != value; 
-    });
 }
 
-console.log(arrayRemove(items, items[0]))
+// ! Render funksjon
+
+const displayCards = (array) =>{
+    container.innerHTML = ""
+    let neweDiv = ``
+    for(const item of array){
+        neweDiv += `
+            <div class="card">
+                <img src="${item.img}" alt="something" />
+                <div class="content">
+                    <h2>${item.name}</h2>
+                    <p>Race: ${item.race}</p>
+                    <p>Type: ${item.type}</p>
+                    <button class="delBtn" id="${item.name}">Delete</button>
+                    <button type="button" id="${item.id}" class="cardBtn">Add me</button>
+                </div>
+            </div>
+        `
+    }
+    container.innerHTML = neweDiv
+    setDeleteEvent()
+    appendListeners()
+}
+
+displayCards(items)
+
+
+
+
+
+
+
+
+
+
+
+
+// const arrayRemove =(arr, value)=> { 
+    
+//     return arr.filter(function(ele){ 
+//         return ele != value; 
+//     });
+// }
+
+
+
+
+
+
+
 
 
 

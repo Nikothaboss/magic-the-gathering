@@ -11,9 +11,11 @@ const collCon = document.querySelector(".collection-container")
 
 const addListener = () =>{
     for(const item of items){
-        document.getElementById(`${item.id}-add`).addEventListener("click", () =>{
-            collection.push(items[findIndex(items, item)])
-
+        document.getElementById(`${item.id}-add`).addEventListener("click", (e) =>{
+            const inArray = collection.find(item => item.name === e.target.name)
+            if(!inArray){
+                collection.push(items[findIndex(items, item)])
+            }
             renderCollection()
         })
     }
@@ -34,7 +36,6 @@ const renderCollection = () =>{
     collCon.innerHTML = "";
     
     for(const coll of collection){
-        console.log(coll)
         collCon.innerHTML += createCard(coll, "remove")
     }
     removeListeners()

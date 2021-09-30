@@ -1,20 +1,40 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.overlord {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 100vh;
+}
+
 img {
   width: 100%;
-  transform: translateY(3px);
 }
 
 .card {
-  width: 300px;
+  max-width: 300px;
   border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .content {
   background-color: white;
 }
 
+.content > * {
+  margin: 10px 0;
+}
+
 .container {
   display: flex;
-  background: rgb(102, 99, 99);
+  background: rgb(57, 91, 204);
+  padding: 20px;
 }
 
 button {
@@ -23,9 +43,11 @@ button {
 }
 
 .content {
-  padding: 10px;
+  padding: 20px;
 }
 
 .collection-container {
   display: flex;
+  background: rgb(86, 45, 161);
+  padding: 20px;
 }

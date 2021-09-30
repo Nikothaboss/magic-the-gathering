@@ -13,7 +13,7 @@ export const createCard = (item, version) =>{
             <h2>${name}</h2>
             <p>Race: ${race}</p>
             <p>Type: ${type}</p>
-            <button type="button" id="${id}-${version}" class="cardBtn">${version === "add" ? "Add" : "Remove"}</button>
+            <button type="button" name="${name}" id="${id}-${version}" class="cardBtn">${version === "add" ? "Add" : "Remove"}</button>
         </div>
     </div>
 

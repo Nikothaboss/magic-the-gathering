@@ -1,0 +1,1 @@
+export const API_LINK = 'https://api.magicthegathering.io/v1/cards';

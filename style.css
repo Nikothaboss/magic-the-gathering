@@ -12,15 +12,16 @@
 }
 
 img {
-  width: 100%;
+  width: 300px;
 }
 
 .card {
-  max-width: 300px;
+  /* max-width: 300px; */
   border: 1px solid black;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-bottom: 20px;
 }
 
 .content {
@@ -33,6 +34,8 @@ img {
 
 .container {
   display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
   background: rgb(57, 91, 204);
   padding: 20px;
 }
@@ -50,4 +53,22 @@ button {
   display: flex;
   background: rgb(86, 45, 161);
   padding: 20px;
+}
+
+/* ! rarety classes */
+
+.common {
+  border: 4px solid gray;
+}
+
+.uncommon {
+  border: 4px solid lightgreen;
+}
+
+.rare {
+  border: 4px solid blue;
+}
+
+.legendary {
+  border: 4px solid orange;
 }

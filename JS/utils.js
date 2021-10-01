@@ -1,4 +1,4 @@
-
+export const cardArr = JSON.parse(window.localStorage.getItem("cardArr"))
 
 
 export const findIndex = (array, item) => {
@@ -45,3 +45,20 @@ export const rarityClass = (rarity) =>{
             return;
     }
 }
+
+export const saveCardArr = (array) => {
+    window.localStorage.setItem('cardArr', JSON.stringify(array));
+    console.log('save cardArr', cardArr);
+  };
+  
+export const readCardArr = () => {
+console.log(cardArr);
+return cardArr;
+};
+
+export const hasImage = (object) => {
+if (object.imageUrl) {
+    return true;
+}
+return false;
+};

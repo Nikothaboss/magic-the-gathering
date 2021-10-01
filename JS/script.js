@@ -1,19 +1,22 @@
 import { collection } from "./data.js";
 import { API_LINK } from "./constants.js";
-import { findIndex, createCard } from "./utils.js";
+import { findIndex, createCard, hasImage, readCardArr, saveCardArr } from "./utils.js";
 const container = document.querySelector(".container");
 const collCon = document.querySelector(".collection-container")
 
-
+const localCollection = readCardArr()
 let items = []
-let localCollection = JSON.parse(window.localStorage.getItem("cardArr"))
+
+if(!localCollection) {
+    window.localStorage.setItem('cardArr', JSON.stringify([]));
+}
 
 // ! Render functions
 
 const renderCollection = () =>{
     collCon.innerHTML = "";
     
-    for(const coll of collection){
+    for(const coll of localCollection){
         collCon.innerHTML += createCard(coll, "remove")
     }
     removeListeners()
@@ -30,11 +33,15 @@ const renderCards = () =>{
 
 const getCards = async (API_LINK) =>{
     const response = await fetch(API_LINK)
-    console.log(response)
-    const objects = await response.json()
-    console.log(objects.cards)
-    items = objects.cards
+    const resObj = await response.json()
+
+    for(const item of resObj.cards){
+        if(hasImage(item)){
+            items.push(item)
+        }
+    }
     renderCards()
+    renderCollection()
     
 }
 
@@ -44,10 +51,10 @@ const getCards = async (API_LINK) =>{
 const addListener = () =>{
     for(const item of items){
         document.getElementById(`${item.id}-add`).addEventListener("click", (e) =>{
-            const inArray = collection.find(item => item.name === e.target.name)
+            const inArray = localCollection.find(item => item.name === e.target.name)
             if(!inArray){
-                collection.push(items[findIndex(items, item)])
-                window.localStorage.setItem("cardArr", JSON.stringify(collection))
+                localCollection.push(items[findIndex(items, item)])
+                saveCardArr(localCollection)
                 renderCollection()
             }else{
                 return;
@@ -58,10 +65,10 @@ const addListener = () =>{
 } 
 
 const removeListeners = () =>{
-    for(const item of collection){
+    for(const item of localCollection){
         document.getElementById(`${item.id}-remove`).addEventListener("click", ()=>{
-            collection.splice(findIndex(collection, item), 1);
-            window.localStorage.setItem("cardArr", JSON.stringify(collection))
+            localCollection.splice(findIndex(collection, item), 1);
+            saveCardArr(localCollection)
             renderCollection()
         })
     }
